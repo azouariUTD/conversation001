@@ -133,13 +133,56 @@ function updateMessage(res, input, data) {
       console.log("failure!");
     });
   }
+  else if(checkZillow(data)){
+    console.log("In Zillow");
+
+      var Zillow  = require('node-zillow');
+
+      //var zwsid = process.env.ZWSID;
+      var zwsid = 'X1-ZWz19gpodwxgcr_1oefy';
+      var zillow = new Zillow(zwsid);
+
+
+      var parameters = {
+          state:'tx',
+          city:'dallas',
+          childtype:'neighborhood',
+
+      };
+
+      zillow.get('GetRegionChildren', parameters)
+          .then(function(results) {
+
+
+              console.log(results.response.list.region);
+
+
+
+              return results;
+
+              // results here is an object { message: {}, request: {}, response: {}}
+          });
+
+
+    var params = [];
+    params.push('Dallas');
+    data.output.text = replaceParams ( data.output.text, params );
+    return res.json(data);
+
+  }
   else{
+    console.log("Hello world");
     return res.json(data);
   }
 }
 function checkWeather(data){
   return data.intents && data.intents.length > 0 && data.intents[0].intent === 'weather'
       && data.entities && data.entities.length > 0 && data.entities[0].entity === 'day';
+}
+function checkZillow(data) {
+  return data.intents && data.intents.length > 0 && data.intents[0].intent === 'zillow'
+      && data.entities && data.entities.length > 0 && data.entities[0].entity === 'me';
+
 }
 
 function replaceParams(original, args){
@@ -161,7 +204,7 @@ function getLocationURL(lat, long){
   }
 };
 
-var key ="3ad38bc8b60856fe";//"add your key here";
+var key ="855a1cfac989e94a";//"add your key here";
 
 if ( cloudantUrl ) {
   // If logging has been enabled (as signalled by the presence of the cloudantUrl) then the
