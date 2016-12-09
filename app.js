@@ -310,6 +310,16 @@ function updateMessage(res, input, data) {
           place = map[0];
         if(data.context.order == 4312 || data.context.order == 3412 || data.context.order == 3241 || data.context.order == 3142 || data.context.order == 3124 || data.context.order == 2341 || data.context.order == 2413 || data.context.order == 2431)
           place = map[5];
+        if(data.context.order == 4213 || data.context.order == 4123 || data.context.order == 2143)
+            place = map[2];
+        if(data.context.order == 4321 || data.context.order == 4231 || data.context.order == 3421 )
+            place = map[7];
+        if(data.context.order == 4132 || data.context.order == 2314 )
+            place = map[3];
+        if(data.context.order == 3214  )
+            place = map[6];
+        if(data.context.order == 2134)
+            place = map[1];
         var params = [];
         var sentence = "(type next to continue) We recommend " + place[0] + " as a place to live. Here are some home prices in the area: " + place[1];
         params.push(sentence);
@@ -322,6 +332,16 @@ function updateMessage(res, input, data) {
             place = map[0];
         if(data.context.order == 4312 || data.context.order == 3412 || data.context.order == 3241 || data.context.order == 3142 || data.context.order == 3124 || data.context.order == 2341 || data.context.order == 2413 || data.context.order == 2431)
             place = map[5];
+        if(data.context.order == 4213 || data.context.order == 4123 || data.context.order == 2143)
+            place = map[2];
+        if(data.context.order == 4321 || data.context.order == 4231 || data.context.order == 3421 )
+            place = map[7];
+        if(data.context.order == 4132 || data.context.order == 2314 )
+            place = map[3];
+        if(data.context.order == 3214  )
+            place = map[6];
+        if(data.context.order == 2134)
+            place = map[1];
         var params = [];
         var sentence = "Here are some schools in the area: " + place[3];
         params.push(sentence);
@@ -334,6 +354,16 @@ function updateMessage(res, input, data) {
             place = map[0];
         if(data.context.order == 4312 || data.context.order == 3412 || data.context.order == 3241 || data.context.order == 3142 || data.context.order == 3124 || data.context.order == 2341 || data.context.order == 2413 || data.context.order == 2431)
             place = map[5];
+        if(data.context.order == 4213 || data.context.order == 4123 || data.context.order == 2143)
+            place = map[2];
+        if(data.context.order == 4321 || data.context.order == 4231 || data.context.order == 3421 )
+            place = map[7];
+        if(data.context.order == 4132 || data.context.order == 2314 )
+            place = map[3];
+        if(data.context.order == 3214  )
+            place = map[6];
+        if(data.context.order == 2134)
+            place = map[1];
         var params = [];
         var sentence = "Finally, for reference here is the safety report for " + place[0] + " : " + place[2];
         params.push(sentence);
