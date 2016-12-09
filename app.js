@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+
+
 'use strict';
 
 require( 'dotenv' ).config( {silent: true} );
@@ -134,7 +136,8 @@ function updateMessage(res, input, data) {
     });
   }
   else if(checkZillow(data)){
-    console.log("In Zillow");
+
+    console.log(data.context.numstuff);
 
       var Zillow  = require('node-zillow');
 
@@ -154,7 +157,7 @@ function updateMessage(res, input, data) {
           .then(function(results) {
 
 
-              console.log(results.response.list.region);
+              //console.log(results.response.list.region);
 
 
 
@@ -165,13 +168,178 @@ function updateMessage(res, input, data) {
 
 
     var params = [];
-    params.push('Dallas');
+    var sentence = "Here is the first link: www.google.com \n Here is the second link: Facebook.com";
+    params.push(sentence);
+
+    var sentence2 = "Here is the 3 link: Facebook.com \n";
+    params.push(sentence2);
+
     data.output.text = replaceParams ( data.output.text, params );
     return res.json(data);
 
   }
+  else if(data.context.part != undefined){
+
+      var place = [];
+      var map = [];
+
+      var m1234 = [];
+      m1234.push("Northwest Dallas");
+      m1234.push("http://www.zillow.com/homes/Northwest-Dallas-Dallas-TX_rb/");
+      m1234.push("https://www.neighborhoodscout.com/zipcode/tx/dallas/75235/");
+      m1234.push("http://www.zillow.com/northwest-dallas-dallas-tx/schools/");
+      map.push(m1234);
+
+      var m2134 = [];
+      m2134.push("Near East");
+      m2134.push("http://www.zillow.com/homes/Near-East-Dallas-TX_rb/");
+      m2134.push("https://www.neighborhoodscout.com/zipcode/tx/dallas/75219/");
+      m2134.push("http://www.zillow.com/near-east-dallas-tx/schools/");
+      map.push(m2134);
+
+      var m3124 = [];
+      m3124.push("Cedar Crest");
+      m3124.push("http://www.zillow.com/homes/Cedar-Crest-Dallas-TX_rb/");
+      m3124.push("https://www.neighborhoodscout.com/zipcode/tx/dallas/75216/");
+      m3124.push("http://www.zillow.com/cedar-crest-dallas-tx/schools/");
+
+      map.push(m3124);
+
+      var m3142 = [];
+      m3142.push("Buckner Terrace");
+      m3142.push("http://www.zillow.com/homes/Buckner-Terrace-Dallas-TX_rb/");
+      m3142.push("https://www.neighborhoodscout.com/zipcode/tx/dallas/75227/");
+      m3142.push("http://www.zillow.com/buckner-terrace-dallas-tx/schools/");
+
+      map.push(m3142);
+
+      var m4 = [];
+      m4.push("Preston Hollow");
+      m4.push("http://www.zillow.com/homes/Preston-Hollow-Dallas-TX_rb/");
+      m4.push("https://www.neighborhoodscout.com/zipcode/tx/dallas/75244/");
+      m4.push("http://www.zillow.com/preston-hollow-dallas-tx/schools/");
+
+      map.push(m4);
+
+      var m5 = [];
+      m5.push("Main Streets");
+      m5.push("http://www.zillow.com/homes/M-Streets-Dallas-TX_rb/");
+      m5.push("https://www.neighborhoodscout.com/zipcode/tx/dallas/75204/");
+      m5.push("http://www.zillow.com/m-streets-dallas-tx/schools/");
+
+      map.push(m5);
+
+      var m6 = [];
+      m6.push("Far north");
+      m6.push("http://www.zillow.com/homes/Far-North-Dallas-TX_rb/");
+      m6.push("https://www.neighborhoodscout.com/tx/dallas/hillcrest-brentfield/");
+      m6.push("http://www.zillow.com/far-north-dallas-tx/schools/");
+
+      map.push(m6);
+
+      var m7 = [];
+      m7.push("Lake highlands");
+      m7.push("	http://www.zillow.com/homes/Lake-Highlands-Dallas-TX_rb/");
+      m7.push("https://www.neighborhoodscout.com/zipcode/tx/dallas/75243/");
+      m7.push("http://www.zillow.com/lake-highlands-dallas-tx/schools/");
+
+      map.push(m7);
+
+      //console.log(data.context.order);
+      //console.log(map[0][0]);
+      switch (data.context.order){
+          case 1234:
+            place = map[0];
+          case 1243:
+            place = map[0];
+          case 1324:
+            place = map[0];
+          case 1342:
+            place = map[0];
+          case 1423:
+            place = map[0];
+          case 1432:
+            place = map[0];
+          case 2134:
+            place = map[1];
+          case 2143:
+            place = map[2];
+          case 2314:
+            place = map[3];
+          case 2341:
+            place = map[5];
+          case 2413:
+            place = map[5];
+          case 2431:
+            place = map[5];
+          case 3124:
+            place = map[5];
+          case 3142:
+            place = map[5];
+          case 3214:
+            place = map[6];
+          case 3241:
+            place = map[5];
+          case 3412:
+            place = map[5];
+          case 3421:
+            place = map[7];
+          case 4123:
+            place = map[2];
+          case 4132:
+            place = map[3];
+          case 4213:
+            place = map[2];
+          case 4231:
+            place = map[7];
+          case 4312:
+            place = map[5];
+          case 4321:
+            place = map[7];
+
+
+
+      }
+
+
+
+    if(data.context.part === 1 )
+    {
+        
+        var params = [];
+        var sentence = "(type next to continue) We recommend " + place[0] + " as a place to live. Here are some home prices in the area: " + place[1];
+        params.push(sentence);
+        data.output.text = replaceParams ( data.output.text, params );
+
+    }
+    else if (data.context.part == 2 )
+    {
+        var params = [];
+        var sentence = "Here are some schools in the area: " + place[3];
+        params.push(sentence);
+        data.output.text = replaceParams ( data.output.text, params );
+
+    }
+    else if ( data.context.part == 3 )
+    {
+        var params = [];
+        var sentence = "Finally, for reference here is the safety report for " + place[0] + " : " + place[2];
+        params.push(sentence);
+        data.output.text = replaceParams ( data.output.text, params );
+    }
+
+    return res.json(data);
+  }
+  else if(data.context.order != undefined){
+
+    //Call the correct select method  (if order = 4312 call select 4312)
+      var row = select(data.context.order);
+
+  }
   else{
-    console.log("Hello world");
+    if(data.context.numstuff != undefined)
+      console.log(data.context.numstuff);
+   // console.log("Hello world");
     return res.json(data);
   }
 }
